@@ -1,0 +1,73 @@
+JPMC Git
+
+In terminal,(dir of the project u want to push)
+git init
+git remote add origin "https://github.com/saisirisha5/JFSDEndSem.git"
+(if origin already there use git remote remove origin)
+git add .  (. current repo)
+git commit -m "message"
+git log( to get details of un and email)
+git push origin master
+
+to pull the changes made on the main branch by others onto ur local computer 
+git pull origin main/branch_name (from the branch u want to pull)
+
+to commit the changes made
+git add . (all changes will be sent to staging area)
+git status
+git commit -m "message"
+git push origin master/ git push
+
+git remote - name of the fork repository
+
+
+To ignore the files while pushing into git:
+ 1) Create a .gitignore file
+ 2) Add the filename (ex: global.js or node_modules)
+ 3) If git already tracked the file then -  git rm --cached global.js
+                                         -  git commit -m "Ignore global.js file" 
+
+TO AVOID A FOLDER(REACT APP) BEING TREATED AS A GIT SUBMODULE
+
+- this helps to avoid git initialization while creating react app :  npx create-react-app client --no-git
+
+- Or immediately after creation: 
+ 1) Copy the folder(for safety)
+ 2) Remove the submodule reference from Git (not the files)
+    From the root of your project:
+	git rm --cached <folder_name>
+        rm -rf .git/modules/<folder_name>
+ 3) Delete .gitmodules if it exists
+    Check if this file exists in your root:  ls .gitmodules
+    If it does, remove it:  rm .gitmodules
+ 4) Remove internal Git from <folder_name>/
+       rm -rf client/.git
+ 5) Add it to the git repo now
+
+
+We have taken one repository (some other user's repo) and forked it into our GitHub using SSH
+-----------        
+|         |
+|Local	  |--------------		
+|Repo     |		|
+|         |		|
+-----------             |   
+    |			|
+   \_/			|
+-----------		|
+|         |		|
+|Own	  |		|
+|Repo     |		X -> they are not connected
+|         |		|    no changes can be committed
+----------- 		|					|
+    |			|					|
+   \_/			|					|	
+-----------		|					|
+|         |             | 					|
+|Forked	  |<-------------					|
+|Repo     |<-----------------------------------------------------
+|         |
+----------- 
+
+git stash -works as a stack(committing changes)
+git stash pop -gets the last commit back
