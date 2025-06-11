@@ -1,3 +1,4 @@
+//routing on client side
 import api from './api';
 
 export const signupUser = async (formData) => {
