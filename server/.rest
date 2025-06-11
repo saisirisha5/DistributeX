@@ -1,7 +1,23 @@
-POST http://localhost:3000/api/auth/login
-Content-Type: application/json
+#LOGIN REQUEST (POST)
+# POST http://localhost:3000/api/auth/login
+# Content-Type: application/json
 
-{
-  "email": "admin1@gmail.com",
-  "password": "siri"
-}
+# {
+#   "email": "sirisha@gmail.com",
+#   "password": "siri"
+# }
+
+# STUDENT PROFILE UPDATE REQUEST (POST)
+# POST http://localhost:3000/api/student/update
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDgwMzcxOTc4ODIzOTQ3NDk5MjAwYiIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ5NjM5MjIxLCJleHAiOjE3NDk3MjU2MjF9.O7BlXwr34vFVT1mKvsRdw21hlRUCE3yrgcxWDHvHV8E
+
+# {
+#   "grade": "A++",
+#   "institution": "KLEF",
+#   "rollNo": "2200030081"
+# }
+# STUDENT PROFILE GET REQUEST (GET)
+GET http://localhost:3000/api/student/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDgwMzcxOTc4ODIzOTQ3NDk5MjAwYiIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ5NjM5MjIxLCJleHAiOjE3NDk3MjU2MjF9.O7BlXwr34vFVT1mKvsRdw21hlRUCE3yrgcxWDHvHV8E
+

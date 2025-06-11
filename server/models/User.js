@@ -22,6 +22,11 @@ const UserSchema = new Schema({
     required: true,
     enum: ['admin', 'teacher', 'student'],
     lowercase: true,
+  },
+   isProfileComplete: 
+   { 
+    type: Boolean, 
+    default: false 
   }
 }, { timestamps: true });
 
