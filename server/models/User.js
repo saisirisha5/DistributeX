@@ -23,11 +23,6 @@ const UserSchema = new Schema({
     enum: ['admin', 'teacher', 'student'],
     lowercase: true,
   },
-   isProfileComplete: 
-   { 
-    type: Boolean, 
-    default: false 
-  }
 }, { timestamps: true });
 
 export default mongoose.model('User', UserSchema);
