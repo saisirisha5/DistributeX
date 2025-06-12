@@ -23,12 +23,43 @@
 # GET http://localhost:3000/api/admin/stats
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDZiMjA5MzM3OTcyNGVjZWFiNTAwOCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0OTY2MTE1MywiZXhwIjoxNzQ5NzQ3NTUzfQ.JnDsjtI_Seh2l-K_NXGqxpfI6mA0Q5dlmpnqxDDsMdE
 
-POST http://localhost:5000/api/teacher/apply
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDliYjFhNDAxZWIzNTRmNmU1ZDcwOSIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ5Njk0MzA2LCJleHAiOjE3NDk3ODA3MDZ9.oEWrnh2j52Lw9ccXmTJHfFssGswkHwh8eiX4ce8RJ8Q
-Content-Type: application/json
+# POST http://localhost:5000/api/teacher/apply
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDliYjFhNDAxZWIzNTRmNmU1ZDcwOSIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ5Njk0MzA2LCJleHAiOjE3NDk3ODA3MDZ9.oEWrnh2j52Lw9ccXmTJHfFssGswkHwh8eiX4ce8RJ8Q
+# Content-Type: application/json
 
-{
-  "qualifications": "MSc in Biology",
-  "subjects": ["Botany", "Zoology"],
-  "bio": "Experienced in teaching high school students for 5 years."
-}
+# {
+#   "qualifications": "MSc in Biology",
+#   "subjects": ["Botany", "Zoology"],
+#   "bio": "Experienced in teaching high school students for 5 years."
+# }
+
+
+# POST http://localhost:5000/api/test/create
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NGE4ZmVlMjVhY2NjMGMzNmRhNTM3NSIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ5NzI0NzgxLCJleHAiOjE3NDk4MTExODF9.8CxBC-P-xSGLv8axNLz6jHMo0mcm3I0eZNmQrJ-R-Hw
+# Content-Type: application/json
+
+# {
+#   "name": "Physics Final",
+#   "isPremium": false,
+#   "threshold": 30,
+#   "dateSlots": [
+#     {
+#       "date": "2025-06-15",
+#       "slots": [
+#         { "startTime": "09:00", "endTime": "11:00", "limit": 10 },
+#         { "startTime": "13:00", "endTime": "15:00", "limit": 10 }
+#       ]
+#     }
+#   ],
+#   "places": [
+#     {
+#       "name": "Room 101, ABC Campus",
+#       "lat": 12.345,
+#       "lng": 78.901
+#     }
+#   ]
+# }
+
+GET http://localhost:5000/api/test/my-tests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NGE4ZmVlMjVhY2NjMGMzNmRhNTM3NSIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ5NzI0NzgxLCJleHAiOjE3NDk4MTExODF9.8CxBC-P-xSGLv8axNLz6jHMo0mcm3I0eZNmQrJ-R-Hw
+
