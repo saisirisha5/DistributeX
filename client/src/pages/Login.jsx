@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,9 +17,13 @@ const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const data = await loginUser(form);
+
       alert('Login successful');
+
+      // Save token and user
       localStorage.setItem('token', data.token);
      
       // Check role and redirect accordingly
@@ -39,6 +44,21 @@ const navigate = useNavigate();
       }
 
       console.log(data);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      const role = data.user.role;
+
+      // Navigate based on role
+      if (role === 'admin') {
+        navigate('/admin/dashboard');
+      } else if (role === 'teacher') {
+        navigate('/teacher/home');
+      } else if (role === 'student') {
+        navigate('/student/home');
+      } else {
+        navigate('/unauthorized');
+      }
+
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
     }
