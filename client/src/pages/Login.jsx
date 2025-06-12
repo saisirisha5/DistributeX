@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService';
-import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -26,22 +26,6 @@ const navigate = useNavigate();
       // Save token and user
       localStorage.setItem('token', data.token);
      
-      // Check role and redirect accordingly
-      if (data.user.role === 'student') 
-      {
-        navigate('/studenthome');
-      } 
-      // else if (data.user.role === 'teacher') 
-      // {
-      //   navigate('/teacher/home');
-      // } 
-      // else if (data.user.role === 'admin') {
-      //   navigate('/admin/home');
-      // } 
-      else
-       {
-        navigate('/');
-      }
 
       console.log(data);
       localStorage.setItem('user', JSON.stringify(data.user));
