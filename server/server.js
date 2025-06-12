@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import studentRoutes from './routes/student.js';
+import teacherRoutes from './routes/teacherRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -15,6 +18,9 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/student', studentRoutes);
+
+app.use('/api/teacher', teacherRoutes);
+app.use('/api/admin', adminRoutes);
 
 
 (async () => {

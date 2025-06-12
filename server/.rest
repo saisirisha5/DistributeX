@@ -1,0 +1,25 @@
+# POST http://localhost:3000/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "admin1@gmail.com",
+#   "password": "siri"
+# }
+
+# GET http://localhost:3000/api/admin/teachers
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDZiMjA5MzM3OTcyNGVjZWFiNTAwOCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODY0NiwiZXhwIjoxNzQ5NzQ1MDQ2fQ.gsOHXAYb2dIMhYv4l5lmZwbXUIP4XE3ZKJS5Z0sH4a8
+
+
+
+# PATCH http://localhost:3000/api/admin/teacher/6849a9b3385ea329e8666b0b
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDZiMjA5MzM3OTcyNGVjZWFiNTAwOCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0OTY1ODY0NiwiZXhwIjoxNzQ5NzQ1MDQ2fQ.gsOHXAYb2dIMhYv4l5lmZwbXUIP4XE3ZKJS5Z0sH4a8
+# Content-Type: application/json
+
+# {
+#   "status": "accepted"
+# }
+
+
+# GET http://localhost:3000/api/admin/stats
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDZiMjA5MzM3OTcyNGVjZWFiNTAwOCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0OTY2MTE1MywiZXhwIjoxNzQ5NzQ3NTUzfQ.JnDsjtI_Seh2l-K_NXGqxpfI6mA0Q5dlmpnqxDDsMdE
+
