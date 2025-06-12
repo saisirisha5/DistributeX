@@ -47,3 +47,18 @@ export const getMyTests = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const getTestDetails = async (req, res) => {
+  try {
+    const test = await TestSchema.findById(req.params.id).populate('teacher');
+
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found' });
+    }
+
+    res.status(200).json({ test });
+  } catch (err) {
+    console.error('Get test details error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
