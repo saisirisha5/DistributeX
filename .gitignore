@@ -29,6 +29,6 @@ node_modules/
 *.eslintcache
 .cache/
 *.pack
-.rest
+server/.rest
 client/node_modules/
 server/node_modules/
