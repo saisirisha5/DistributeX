@@ -6,7 +6,7 @@ import { AuthProvider } from './context/AuthContext';
 
 import NotAuthorized from './pages/NotAuthorized';
 
-import StudentHome from './pages/Student/StudentHome';
+import StudentHome from './pages/student/StudentHome';
 import TeacherHome from './pages/Teacher/TeacherHome';
 import TeacherDashboard from './pages/Teacher/TeacherDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';

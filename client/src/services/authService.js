@@ -1,3 +1,4 @@
+//routing on client side
 import api from './api';
 
 export const signupUser = async (formData) => {
@@ -9,3 +10,4 @@ export const loginUser = async (formData) => {
   const res = await api.post('/auth/login', formData);
   return res.data;
 };
+

@@ -22,7 +22,7 @@ const UserSchema = new Schema({
     required: true,
     enum: ['admin', 'teacher', 'student'],
     lowercase: true,
-  }
+  },
 }, { timestamps: true });
 
 export default mongoose.model('User', UserSchema);
