@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import LocationPicker from '../../components/LocationPicker'; 
 
@@ -132,13 +133,14 @@ const TeacherDashboard = () => {
       ) : tests.length === 0 ? (
         <p>No tests created yet.</p>
       ) : (
-        <ul>
-          {tests.map((test) => (
-            <li key={test._id}>
-              <strong>{test.name}</strong> - Premium: {test.isPremium ? 'Yes' : 'No'} - Threshold: {test.threshold}
-            </li>
-          ))}
-        </ul>
+              <ul>
+        {tests.map((test) => (
+          <li key={test._id}>
+            <strong>{test.name}</strong> - Premium: {test.isPremium ? 'Yes' : 'No'} - Threshold: {test.threshold}
+            <Link to={`/teacher/test/${test._id}`}>View Details</Link>
+          </li>
+        ))}
+      </ul>
       )}
 
       <button onClick={() => setShowForm(!showForm)} style={{ marginTop: '20px' }}>
