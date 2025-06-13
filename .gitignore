@@ -30,3 +30,4 @@ node_modules/
 .cache/
 *.pack
 .rest
+client/node_modules/
