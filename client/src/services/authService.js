@@ -10,3 +10,4 @@ export const loginUser = async (formData) => {
   const res = await api.post('/auth/login', formData);
   return res.data;
 };
+
