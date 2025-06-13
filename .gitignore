@@ -31,3 +31,4 @@ node_modules/
 *.pack
 .rest
 client/node_modules/
+server/node_modules/
