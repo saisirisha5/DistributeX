@@ -10,7 +10,7 @@ import StudentHome from './pages/student/StudentHome';
 import TeacherHome from './pages/Teacher/TeacherHome';
 import TeacherDashboard from './pages/Teacher/TeacherDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
-
+import TestDetail from './pages/Teacher/TestDetail'; 
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -38,6 +38,12 @@ function App() {
            <Route path="/teacher/dashboard" element={
             <ProtectedRoute allowedRoles={['teacher']}>
               <TeacherDashboard />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/teacher/test/:id" element={
+            <ProtectedRoute allowedRoles={['teacher']}>
+              <TestDetail />
             </ProtectedRoute>
           } />
 
