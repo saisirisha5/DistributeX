@@ -3,4 +3,16 @@
   background-color: #ffcc00; /* Example color */
   color: white;
 }
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #0b5ed7;
+  color: white;
+}
+.nav-right {
+  text-align: right;
+}
+
 
