@@ -26,5 +26,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.restnode_modules/
+node_modules/
 *.eslintcache
+.cache/
+*.pack
+server/.rest
+client/node_modules/
+server/node_modules/
