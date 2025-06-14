@@ -16,6 +16,8 @@ import AvailableTests from './pages/student/AvailableTests';
 import EnrollPage from './pages/student/EnrollPage';
 import AdminTestsPage from './pages/Admin/AdminTestsPage';
 import AdminTestDetail from './pages/Admin/AdminTestDetail';
+import TestEnrollments from './pages/Teacher/TestEnrollments';
+import AdminTestEnrollments from './pages/Admin/AdminTestEnrollments';
 
 function App() {
   return (
@@ -59,6 +61,18 @@ function App() {
            <Route path="/teacher/test/:id" element={
             <ProtectedRoute allowedRoles={['teacher']}>
               <TestDetail />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/teacher/test/:id/enrollments" element={
+            <ProtectedRoute allowedRoles={['teacher']}>
+              <TestEnrollments />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/admin/test/:id/enrollments" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminTestEnrollments />
             </ProtectedRoute>
           } />
 

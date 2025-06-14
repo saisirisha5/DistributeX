@@ -1,6 +1,8 @@
 import Teacher from '../models/Teacher.js';
 import User from '../models/User.js';
 import Test from '../models/TestSchema.js';
+import TestAttempt from '../models/TestAttemptSchema.js';
+import StudentProfile from '../models/StudentProfileSchema.js';
 
 //  Get all teacher applications
 export const getAllTeacherApplications = async (req, res) => {
@@ -96,6 +98,69 @@ export const getAdminTestDetails = async (req, res) => {
     res.status(200).json({ test });
   } catch (err) {
     console.error('Admin test details error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+// ✅ GET: /admin/test/:id/enrollments
+export const getAdminTestEnrolledDetails = async (req, res) => {
+  try {
+    const testId = req.params.id;
+
+    const test = await Test.findById(testId).populate({
+      path: 'teacher',
+      populate: { path: 'user', select: 'name email' },
+    });
+
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found' });
+    }
+
+    const attempts = await TestAttempt.find({ test: testId })
+      .populate('student', 'name email')
+      .sort({ createdAt: -1 });
+
+    const studentUserIds = attempts.map((a) => a.student._id);
+    const profiles = await StudentProfile.find({ user: { $in: studentUserIds } });
+
+    const profileMap = {};
+    profiles.forEach((p) => {
+      profileMap[p.user.toString()] = p;
+    });
+
+    const enrolledData = attempts.map((attempt) => {
+      const student = attempt.student;
+      const profile = profileMap[student._id.toString()] || {};
+
+      return {
+        student: {
+          name: student.name,
+          email: student.email,
+          rollNo: profile.rollNo || 'N/A',
+          grade: profile.grade || 'N/A',
+          institution: profile.institution || 'N/A',
+        },
+        status: attempt.status,
+        enrolledAt: attempt.createdAt,
+        selectedDate: attempt.selectedDate,
+        selectedSlot: attempt.selectedSlot,
+        selectedPlace: attempt.selectedPlace,
+        paymentStatus: attempt.paymentStatus,
+      };
+    });
+
+    const remainingSlots = test.threshold - test.enrolledCount;
+
+    res.status(200).json({
+      testName: test.name,
+      enrolledCount: enrolledData.length,
+      remainingSlots,
+      enrollments: enrolledData,
+    });
+
+  } catch (err) {
+    console.error('Admin enrollment fetch error:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };

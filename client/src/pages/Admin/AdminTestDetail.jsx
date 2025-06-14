@@ -5,11 +5,14 @@ import Calendar from 'react-calendar';  // For the calendar
 import 'react-calendar/dist/Calendar.css';  // Styling for the calendar
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';  // For the map
 import 'leaflet/dist/leaflet.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const AdminTestDetail = () => {
   const { id } = useParams(); // Get the test ID from URL
   const [test, setTest] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Fetch test details when component mounts
   useEffect(() => {
@@ -92,6 +95,11 @@ const AdminTestDetail = () => {
           </div>
         ))}
       </div>
+
+      <button onClick={() => navigate(`/admin/test/${test._id}/enrollments`)}>
+        View Enrolled Students
+      </button>
+
     </div>
   );
 };
