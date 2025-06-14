@@ -20,3 +20,12 @@ export const updateTeacherStatus = async (id, status, token) => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+
+export const getAllTests = async (token) => {
+  const res = await api.get('/admin/tests', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+};

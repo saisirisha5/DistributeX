@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getStats,
   getTeacherApplications,
@@ -6,10 +7,10 @@ import {
 } from '../../services/adminService';
 
 const AdminDashboard = () => {
-  const [stats, setStats] = useState({ students: 0, teachers: 0 });
+  const [stats, setStats] = useState({ students: 0, teachers: 0,tests : 0});
   const [applications, setApplications] = useState([]);
   const token = localStorage.getItem('token');
-
+  const navigate = useNavigate();
   const fetchApplications = useCallback(async () => {
     try {
       const data = await getTeacherApplications(token);
@@ -49,7 +50,22 @@ const AdminDashboard = () => {
       <div style={{ marginBottom: '2rem' }}>
         <p>Total Students: <strong>{stats.students}</strong></p>
         <p>Total Teachers: <strong>{stats.teachers}</strong></p>
+        <p>Total Tests: <strong>{stats.tests}</strong></p>
       </div>
+        <button
+        onClick={() => navigate('/admin/tests')}
+        style={{
+          marginBottom: '2rem',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          padding: '10px 15px',
+          cursor: 'pointer',
+          borderRadius: '4px'
+        }}
+      >
+        View All Tests
+      </button>
 
       <h3>Teacher Applications</h3>
       <table border="1" cellPadding="10">
