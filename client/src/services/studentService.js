@@ -19,3 +19,12 @@ export const enrollInTest = (testId, data, token) =>
   api.post('student-test/tests/enroll', { testId, ...data }, {
     headers: { Authorization: `Bearer ${token}` }
   });
+
+// Get enrolled tests (VIEW ENROLLED TESTS)
+export const getEnrolledTests = async (token) => {
+  const res = await api.get('student-test/tests/viewEnrolled', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+

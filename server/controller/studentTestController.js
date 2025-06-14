@@ -86,3 +86,21 @@ export const enrollInTest = async (req, res) => {
   }
 };
 
+
+export const getEnrolledTests = async (req, res) => {
+  try {
+    const studentId = req.user.id;
+
+    const attempts = await TestAttempt.find({ 
+        student: studentId, 
+        status: 'enrolled' 
+      })
+      .populate('test')  
+      .lean();
+
+    res.status(200).json(attempts);
+  } catch (error) {
+    console.error('Error fetching enrolled tests:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};

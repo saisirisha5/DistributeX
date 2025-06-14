@@ -16,8 +16,10 @@ import AvailableTests from './pages/student/AvailableTests';
 import EnrollPage from './pages/student/EnrollPage';
 import AdminTestsPage from './pages/Admin/AdminTestsPage';
 import AdminTestDetail from './pages/Admin/AdminTestDetail';
+import ViewEnrolled from './pages/student/ViewEnrolled';
 import TestEnrollments from './pages/Teacher/TestEnrollments';
 import AdminTestEnrollments from './pages/Admin/AdminTestEnrollments';
+
 
 function App() {
   return (
@@ -40,11 +42,19 @@ function App() {
             </ProtectedRoute>
           } />
             
+             <Route path="/student/tests/viewEnrolled" element={
+              <ProtectedRoute allowedRoles={['student']}>
+                <ViewEnrolled/>
+              </ProtectedRoute>
+            } />
+
             <Route path="/student/tests/enroll/:testId" element={
               <ProtectedRoute allowedRoles={['student']}>
                 <EnrollPage/>
               </ProtectedRoute>
             } />
+
+            
 
             <Route path="/teacher/home" element={
             <ProtectedRoute allowedRoles={['teacher']}>
