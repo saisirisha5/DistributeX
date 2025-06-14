@@ -14,6 +14,9 @@ import TestDetail from './pages/Teacher/TestDetail';
 import ProtectedRoute from './components/ProtectedRoute';
 import AvailableTests from './pages/student/AvailableTests';
 import EnrollPage from './pages/student/EnrollPage';
+import AdminTestsPage from './pages/Admin/AdminTestsPage';
+import AdminTestDetail from './pages/Admin/AdminTestDetail';
+
 function App() {
   return (
     <AuthProvider>
@@ -56,6 +59,18 @@ function App() {
            <Route path="/teacher/test/:id" element={
             <ProtectedRoute allowedRoles={['teacher']}>
               <TestDetail />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/admin/tests" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminTestsPage />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/test/details/:id" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminTestDetail />
             </ProtectedRoute>
           } />
 

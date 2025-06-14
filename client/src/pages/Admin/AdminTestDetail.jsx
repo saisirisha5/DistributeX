@@ -6,7 +6,7 @@ import 'react-calendar/dist/Calendar.css';  // Styling for the calendar
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';  // For the map
 import 'leaflet/dist/leaflet.css';
 
-const TestDetail = () => {
+const AdminTestDetail = () => {
   const { id } = useParams(); // Get the test ID from URL
   const [test, setTest] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const TestDetail = () => {
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
-        const res = await api.get(`/test/details/${id}`);
+        const res = await api.get(`/admin/test/details/${id}`);
         setTest(res.data.test);
       } catch (error) {
         console.error('Failed to fetch test details', error);
@@ -37,12 +37,12 @@ const TestDetail = () => {
 
   // Format dates for calendar highlighting
   const markedDates = test.dateSlots.map(ds => new Date(ds.date).toLocaleDateString()); // Format to match calendar date format
-  console.log('Marked Dates: ', markedDates);  // Debug log
+//   console.log('Marked Dates: ', markedDates);  // Debug log
 
   return (
     <div>
       <h2>{test.name}</h2>
-      
+      <p><strong>Created by:</strong> {test.teacher?.user?.name || 'NA'}</p>
       <p><strong>Premium Test:</strong> {test.isPremium ? 'Yes' : 'No'}</p>
       <p><strong>Threshold:</strong> {test.threshold} students</p>
 
@@ -96,4 +96,4 @@ const TestDetail = () => {
   );
 };
 
-export default TestDetail;
+export default AdminTestDetail;
