@@ -4,7 +4,8 @@ import {
   updateTeacherStatus,
   getDashboardStats,
   getAllTestsWithTeacher,
-  getAdminTestDetails
+  getAdminTestDetails,
+  getAdminTestEnrolledDetails
 } from '../controller/adminController.js';
 
 import verifyToken from '../middleware/authMiddleware.js';
@@ -34,6 +35,7 @@ router.get('/tests', verifyToken ,isAdmin, getAllTestsWithTeacher);
 // routes/admin.js
 router.get('/test/details/:id', verifyToken, isAdmin, getAdminTestDetails);
 
-
+//GET /admin/test/:id/enrollments
+router.get('/test/:id/enrollments', verifyToken, isAdmin,getAdminTestEnrolledDetails);
 
 export default router;
