@@ -66,7 +66,7 @@ export const enrollInTest = async (req, res) => {
     if (!location) return res.status(400).json({ message: "Invalid location" });
 
     // Update slot
-    slot.enrolled += 1;
+    test.enrolledCount += 1;
 
     const attempt = new TestAttempt({
       student: studentId,
