@@ -12,6 +12,10 @@ import TeacherDashboard from './pages/Teacher/TeacherDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import TestDetail from './pages/Teacher/TestDetail'; 
 import ProtectedRoute from './components/ProtectedRoute';
+import AvailableTests from './pages/student/AvailableTests';
+import EnrollPage from './pages/student/EnrollPage';
+import AdminTestsPage from './pages/Admin/AdminTestsPage';
+import AdminTestDetail from './pages/Admin/AdminTestDetail';
 
 function App() {
   return (
@@ -28,7 +32,18 @@ function App() {
               <StudentHome />
             </ProtectedRoute>
           } />
+             <Route path="/student/tests" element={
+            <ProtectedRoute allowedRoles={['student']}>
+              <AvailableTests />
+            </ProtectedRoute>
+          } />
             
+            <Route path="/student/tests/enroll/:testId" element={
+              <ProtectedRoute allowedRoles={['student']}>
+                <EnrollPage/>
+              </ProtectedRoute>
+            } />
+
             <Route path="/teacher/home" element={
             <ProtectedRoute allowedRoles={['teacher']}>
               <TeacherHome />
@@ -44,6 +59,18 @@ function App() {
            <Route path="/teacher/test/:id" element={
             <ProtectedRoute allowedRoles={['teacher']}>
               <TestDetail />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/admin/tests" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminTestsPage />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/test/details/:id" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminTestDetail />
             </ProtectedRoute>
           } />
 
