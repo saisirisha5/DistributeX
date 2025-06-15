@@ -40,7 +40,11 @@ const StudentHome = () => {
       />
       <div className="p-6">
         {!profile ? (
-          <CompleteProfileForm onProfileComplete={setProfile} />
+          <CompleteProfileForm 
+            onProfileComplete={setProfile} 
+            existingUser={user} 
+            existingProfile={profile} 
+          />
         ) : (
           <>
             <div className="text-center mt-8 mb-6">
@@ -50,10 +54,11 @@ const StudentHome = () => {
           </>
         )}
       </div>
+      <br/>
       <Link to="/student/tests">
         <button className="bg-blue-600 text-white px-4 py-2 rounded">Browse Tests</button>
       </Link>
-
+      
       <Link to="/student/tests/viewEnrolled">
         <button className="bg-blue-600 text-white px-4 py-2 rounded">View Enrolled Tests</button>
       </Link>
