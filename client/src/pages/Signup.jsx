@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { signupUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import GoogleLogin from '../components/GoogleLogin';
+
 const Signup = () => {
   const [form, setForm] = useState({
     name: '',
@@ -8,6 +10,9 @@ const Signup = () => {
     password: '',
     role: 'student',
   });
+
+   const [role, setRole] = useState('student'); 
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -77,6 +82,30 @@ const Signup = () => {
             Login
           </span>
         </p>
+
+        {/* Signup with Google */}
+          <div className="my-4" />
+            <p className="text-center text-gray-500">OR</p>
+
+            <div className="mt-4">
+              <label className="block text-sm text-gray-700 mb-1">
+                Select Role for Google Login:&nbsp;&nbsp;
+              </label>
+              <select
+                onChange={(e) => setRole(e.target.value)}
+                value={role}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+
+              <div className="mt-4">
+                <GoogleLogin role={role} />
+              </div>
+            </div>
+
+
       </div>
     </div>
   );
