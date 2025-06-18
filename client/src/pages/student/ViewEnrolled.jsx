@@ -30,31 +30,31 @@ const ViewEnrolled = () => {
       {tests.length === 0 ? (
         <p>No tests enrolled yet.</p>
       ) : (
-        <table className="w-full border border-gray-500 border-collapse">
+        <table  border="1" cellPadding="10" style={{ cursor: 'pointer' }}>
           <thead>
-            <tr className="bg-gray-200">
-              <th className="p-2 border border-gray-500">Test Name</th>
-              <th className="p-2 border border-gray-500">Date</th>
-              <th className="p-2 border border-gray-500">Time Slot</th>
-              <th className="p-2 border border-gray-500">Location</th>
+            <tr>
+              <th>Test Name</th>
+              <th>Date</th>
+              <th>Time Slot</th>
+              <th>Location</th>
             </tr>
           </thead>
           <tbody>
             {tests.map((attempts, idx) => (
-              <tr key={idx} className="text-center">
-                <td className="p-2 border border-gray-500">{attempts.test?.name}</td>
-                <td className="p-2 border border-gray-500">{new Date(attempts.selectedDate).toDateString()}</td>
-                <td className="p-2 border border-gray-500">
+              <tr key={idx}>
+                <td>{attempts.test?.name}</td>
+                <td>{new Date(attempts.selectedDate).toDateString()}</td>
+                <td>
                 {attempts.selectedSlot?.startTime} - {attempts.selectedSlot?.endTime}
                 </td>
-                <td className="p-2 border border-gray-500">{attempts.selectedPlace?.name}</td>
+                <td>{attempts.selectedPlace?.name}</td>
             </tr>
             ))}
           </tbody>
         </table>
       )}
       <div className="mt-6 text-center">
-        <Link to="/student/home" className="text-blue-600 underline">← Back to Home</Link>
+        <br/><Link to="/student/home" className="text-blue-600 underline">← Back to Home</Link>
       </div>
     </div>
   );

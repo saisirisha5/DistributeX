@@ -1,7 +1,6 @@
 //Main Home Page (for login and signup)
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Code } from "lucide-react"; // Optional: if you're using lucide icons
 
 const Home = () => {
   const navigate = useNavigate();

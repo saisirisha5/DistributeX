@@ -87,6 +87,7 @@ const EnrollPage = () => {
               <li
                   key={index}
                   onClick={() => setSelectedSlot(slot)}
+                  
                   className={`cursor-pointer px-4 py-2 rounded border my-1 flex justify-between items-center ${
                   selectedSlot === slot ? 'bg-blue-600 text-white border-blue-700' : 'bg-gray-100'
                   }`}

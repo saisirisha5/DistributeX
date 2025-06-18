@@ -17,7 +17,6 @@ const verifyToken = async (req, res, next) => {
 
     // Attach decoded payload directly
     req.user = decoded;
-
     
     // only fetch if needed
     if (!decoded.role) {

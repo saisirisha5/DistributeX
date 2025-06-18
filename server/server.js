@@ -1,8 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
+
+import connectDB from './config/db.js'; //MongoDB connection
+
 import authRoutes from './routes/auth.js';
 import studentRoutes from './routes/student.js';
 import teacherRoutes from './routes/teacherRoutes.js';
@@ -24,6 +25,7 @@ app.use('/api/teacher', teacherRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/student-test',studentTestRoutes);
+
 
 (async () => {
   try {
