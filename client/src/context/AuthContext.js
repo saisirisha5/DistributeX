@@ -14,8 +14,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const login = (token) => {
+    localStorage.setItem('token', token);
+    const decoded = jwtDecode(token);
+    setUser(decoded);
+  };
+
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser ,login ,logout}}>
       {children}
     </AuthContext.Provider>
   );

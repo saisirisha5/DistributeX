@@ -29,7 +29,6 @@ function App() {
            <Route path="/" element={<Home/>}/>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-             <Route path="/unauthorized" element={<NotAuthorized />} />
 
              <Route path="/student/home" element={
             <ProtectedRoute allowedRoles={['student']}>
@@ -37,7 +36,7 @@ function App() {
             </ProtectedRoute>
           } />
              <Route path="/student/tests" element={
-            <ProtectedRoute allowedRoles={['student']}>
+               <ProtectedRoute allowedRoles={['student']}>
               <AvailableTests />
             </ProtectedRoute>
           } />
@@ -57,46 +56,47 @@ function App() {
             
 
             <Route path="/teacher/home" element={
-            <ProtectedRoute allowedRoles={['teacher']}>
+              <ProtectedRoute allowedRoles={['teacher']}>
               <TeacherHome />
             </ProtectedRoute>
           } />
 
            <Route path="/teacher/dashboard" element={
-            <ProtectedRoute allowedRoles={['teacher']}>
+             <ProtectedRoute allowedRoles={['teacher']}>
               <TeacherDashboard />
             </ProtectedRoute>
           } />
 
            <Route path="/teacher/test/:id" element={
-            <ProtectedRoute allowedRoles={['teacher']}>
+             <ProtectedRoute allowedRoles={['teacher']}>
               <TestDetail />
             </ProtectedRoute>
           } />
 
            <Route path="/teacher/test/:id/enrollments" element={
-            <ProtectedRoute allowedRoles={['teacher']}>
+             <ProtectedRoute allowedRoles={['teacher']}>
               <TestEnrollments />
             </ProtectedRoute>
           } />
 
            <Route path="/admin/test/:id/enrollments" element={
-            <ProtectedRoute allowedRoles={['admin']}>
+             <ProtectedRoute allowedRoles={['admin']}>
               <AdminTestEnrollments />
             </ProtectedRoute>
           } />
 
            <Route path="/admin/tests" element={
-            <ProtectedRoute allowedRoles={['admin']}>
+             <ProtectedRoute allowedRoles={['admin']}>
               <AdminTestsPage />
             </ProtectedRoute>
           } />
 
            <Route path="/test/details/:id" element={
-            <ProtectedRoute allowedRoles={['admin']}>
+             <ProtectedRoute allowedRoles={['admin']}>
               <AdminTestDetail />
             </ProtectedRoute>
           } />
+          <Route path="/unauthorized" element={<NotAuthorized />} />
 
           <Route path="/admin/dashboard" element={
             <ProtectedRoute allowedRoles={['admin']}>
