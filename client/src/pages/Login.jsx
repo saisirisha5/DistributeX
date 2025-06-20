@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService';
-
+import { useAuth } from '../context/AuthContext'; // 👈 Add this
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -9,7 +9,8 @@ const Login = () => {
     password: '',
   });
 
-const navigate = useNavigate();
+  const { login } = useAuth(); // 👈 Get login function from context
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,12 +24,8 @@ const navigate = useNavigate();
 
       alert('Login successful');
 
-      // Save token and user
-      localStorage.setItem('token', data.token);
-     
-
-      console.log(data);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      // Save token via AuthContext
+      login(data.token); // 👈 Important!
 
       const role = data.user.role;
 
@@ -47,6 +44,7 @@ const navigate = useNavigate();
       alert(err.response?.data?.message || 'Login failed');
     }
   };
+
 
   return (
      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-indigo-200">
