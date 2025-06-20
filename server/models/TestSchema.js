@@ -9,6 +9,10 @@ const slotSchema = new Schema({
     type: Number,
     default: 0,
   },
+  questions: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Question',
+  }],
 });
 
 const dateSlotSchema = new Schema({

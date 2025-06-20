@@ -18,6 +18,7 @@ import AdminTestsPage from './pages/Admin/AdminTestsPage';
 import AdminTestDetail from './pages/Admin/AdminTestDetail';
 import TestEnrollments from './pages/Teacher/TestEnrollments';
 import AdminTestEnrollments from './pages/Admin/AdminTestEnrollments';
+import ManageQuestions from './pages/Teacher/ManageQuestions';
 
 function App() {
   return (
@@ -60,6 +61,12 @@ function App() {
            <Route path="/teacher/test/:id" element={
              <ProtectedRoute allowedRoles={['teacher']}>
               <TestDetail />
+            </ProtectedRoute>
+          } />
+
+           <Route path="/teacher/test/:id/dateslot/:dateIndex/slot/:slotIndex/questions" element={
+             <ProtectedRoute allowedRoles={['teacher']}>
+              <ManageQuestions />
             </ProtectedRoute>
           } />
 

@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // for getting the test ID from the URL
+import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import Calendar from 'react-calendar';  // For the calendar
-import 'react-calendar/dist/Calendar.css';  // Styling for the calendar
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';  // For the map
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useNavigate } from 'react-router-dom';
-
 
 const TestDetail = () => {
-  const { id } = useParams(); // Get the test ID from URL
+  const { id } = useParams();
+  console.log("🚨 ID:", id)
+
   const [test, setTest] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
-  // Fetch test details when component mounts
+
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
@@ -30,43 +29,32 @@ const TestDetail = () => {
     fetchTestDetails();
   }, [id]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <p>Loading...</p>;
+  if (!test) return <p>Test not found.</p>;
 
-  if (!test) {
-    return <p>Test not found.</p>;
-  }
-
-  // Format dates for calendar highlighting
-  const markedDates = test.dateSlots.map(ds => new Date(ds.date).toLocaleDateString()); // Format to match calendar date format
-  console.log('Marked Dates: ', markedDates);  // Debug log
+  const markedDates = test.dateSlots.map(ds => new Date(ds.date).toLocaleDateString());
 
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <h2>{test.name}</h2>
-      
+
       <p><strong>Premium Test:</strong> {test.isPremium ? 'Yes' : 'No'}</p>
       <p><strong>Threshold:</strong> {test.threshold} students</p>
 
-      {/* Calendar with dates marked */}
       <div>
         <h4>Test Dates</h4>
         <Calendar
           tileClassName={({ date }) => {
-            // Format the date from calendar to check if it exists in markedDates
-            const dateStr = date.toLocaleDateString(); // Format to match the format used in markedDates
-            console.log('Calendar Tile Date:', dateStr);  // Debug log
-            return markedDates.includes(dateStr) ? 'highlight' : null; // Compare formatted dates
+            const dateStr = date.toLocaleDateString();
+            return markedDates.includes(dateStr) ? 'highlight' : null;
           }}
         />
       </div>
 
-      {/* Map with test places */}
-      <div style={{ height: '300px' }}>
+      <div style={{ height: '300px', marginTop: '20px' }}>
         <h4>Test Locations</h4>
         <MapContainer
-          center={[test.places[0]?.lat || 51.505, test.places[0]?.lng || -0.09]}  // Default to first place if available
+          center={[test.places[0]?.lat || 51.505, test.places[0]?.lng || -0.09]}
           zoom={13}
           style={{ height: '100%' }}
         >
@@ -79,16 +67,23 @@ const TestDetail = () => {
         </MapContainer>
       </div>
 
-      {/* Date slots */}
-      <div>
+      <div style={{ marginTop: '20px' }}>
         <h4>Date Slots</h4>
-        {test.dateSlots.map((ds, index) => (
-          <div key={index}>
+        {test.dateSlots.map((ds, dateIndex) => (
+          <div key={dateIndex}>
             <p><strong>Date:</strong> {new Date(ds.date).toLocaleDateString()}</p>
             <ul>
-              {ds.slots.map((slot, idx) => (
-                <li key={idx}>
-                  <strong>Slot {idx + 1}:</strong> {slot.startTime} - {slot.endTime} | Limit: {slot.limit} students
+              {ds.slots.map((slot, slotIndex) => (
+                <li key={slotIndex}>
+                  <strong>Slot {slotIndex + 1}:</strong> {slot.startTime} - {slot.endTime} | Limit: {slot.limit}
+                  <button
+                    style={{ marginLeft: '10px' }}
+                    onClick={() =>
+                      navigate(`/teacher/test/${id}/dateslot/${dateIndex}/slot/${slotIndex}/questions`)
+                    }
+                  >
+                    Manage Questions
+                  </button>
                 </li>
               ))}
             </ul>
@@ -97,7 +92,7 @@ const TestDetail = () => {
       </div>
 
       <button onClick={() => navigate(`/teacher/test/${id}/enrollments`)}>
-          View Enrolled Students
+        View Enrolled Students
       </button>
     </div>
   );
