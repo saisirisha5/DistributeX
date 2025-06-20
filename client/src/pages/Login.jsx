@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService';
-import { useAuth } from '../context/AuthContext'; // 👈 Add this
+import { useAuth } from '../context/AuthContext'; 
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -9,7 +9,7 @@ const Login = () => {
     password: '',
   });
 
-  const { login } = useAuth(); // 👈 Get login function from context
+  const { login } = useAuth(); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
