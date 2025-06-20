@@ -14,5 +14,55 @@
 .nav-right {
   text-align: right;
 }
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0066cc;
+  color: white;
+  padding: 10px 20px;
+}
+
+.navbar-left h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-name {
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.roll-no {
+  font-size: 12px;
+  display: block;
+  color: white;
+}
+
+.profile-button {
+  background: white;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 22px;
+  cursor: pointer;
+  color: black;
+}
+
+.profile-button:hover {
+  background-color: #dddddd;
+}
+
 
 

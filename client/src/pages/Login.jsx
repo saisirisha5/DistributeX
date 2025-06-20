@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService';
+
 import { useAuth } from '../context/AuthContext'; 
+
+import GoogleLogin from '../components/GoogleLogin'; // Adjust the import path as necessary
+
 
 const Login = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
+  const [role] = useState('student'); 
 
   const { login } = useAuth(); 
   const navigate = useNavigate();
@@ -25,7 +30,7 @@ const Login = () => {
       alert('Login successful');
 
       // Save token via AuthContext
-      login(data.token); // 👈 Important!
+      login(data.token); 
 
       const role = data.user.role;
 
@@ -83,6 +88,13 @@ const Login = () => {
             Sign up
           </span>
         </p>
+       
+         <div className="my-4" />
+          <p className="text-center text-gray-500">Or</p>
+
+          <div className="mt-4">
+            <GoogleLogin role={role} />
+          </div>
       </div>
     </div>
   );

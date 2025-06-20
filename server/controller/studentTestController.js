@@ -20,7 +20,6 @@ export const getAllTests = async (req, res) => {
   }
 };
 
-
 //to get a specific test by id (search bar) 
 export const getTestById = async (req, res) => {
   try {
@@ -35,20 +34,27 @@ export const getTestById = async (req, res) => {
   }
 };
 
-
 //after student enrolls in a test, it creates a TestAttempt
 export const enrollInTest = async (req, res) => {
   const studentId = req.user.id;
   const { testId, selectedDate, selectedSlot, selectedPlace } = req.body;
 
   try {
-    //to check if already enrolled in the test
-    const existing = await TestAttempt.findOne({ student: studentId, test: testId });
-    if (existing) return res.status(400).json({ message: "Already enrolled" });
     
     //to check if the test exists
     const test = await Test.findById(testId);
     if (!test) return res.status(404).json({ message: "Test not found" });
+    
+    if (test.isPremium) 
+    {
+      return res.status(403).json({ message: "This is a premium test. Use payment flow." });
+     }
+
+    // Check if the student is already enrolled in the test
+    const existing = await TestAttempt.findOne({ student: studentId, test: testId });
+    if (existing) {
+      return res.status(400).json({ message: "Already enrolled" });
+    }
 
     // Validate slot limit
     const dateSlot = test.dateSlots.find(ds => new Date(ds.date).toISOString() === new Date(selectedDate).toISOString());
@@ -66,6 +72,7 @@ export const enrollInTest = async (req, res) => {
     if (!location) return res.status(400).json({ message: "Invalid location" });
 
     // Update slot
+    slot.enrolled += 1;
     test.enrolledCount += 1;
 
     const attempt = new TestAttempt({
@@ -74,15 +81,33 @@ export const enrollInTest = async (req, res) => {
       selectedDate,
       selectedSlot,
       selectedPlace,
-      paymentStatus: test.isPremium ? "pending" : "not_required",
+      paymentStatus: "not_required",
     });
 
     await attempt.save();
     await test.save();
 
-    res.status(201).json({ message: "Enrolled successfully", attempt });
+    res.status(201).json({ message: "Enrolled successfully", testAttemptId: attempt._id });
   } catch (err) {
     res.status(500).json({ message: "Error enrolling", error: err.message });
   }
 };
 
+//to get all enrolled tests for a student
+export const getEnrolledTests = async (req, res) => {
+  try {
+    const studentId = req.user.id;
+
+    const attempts = await TestAttempt.find({ 
+        student: studentId, 
+        status: 'enrolled' 
+      })
+      .populate('test')  
+      .lean();
+
+    res.status(200).json(attempts);
+  } catch (error) {
+    console.error('Error fetching enrolled tests:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
