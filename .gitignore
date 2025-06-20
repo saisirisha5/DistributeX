@@ -33,3 +33,6 @@ node_modules/
 server/.rest
 client/node_modules/
 server/node_modules/
+client/.env
+client/src/static-test
+client/src/static-test/login.html

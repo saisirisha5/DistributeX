@@ -17,13 +17,43 @@ export const getStudentProfile = async (req, res) => {
 };
 
 
+// export const updateStudentProfile = async (req, res) => {
+//   const { grade, institution, rollNo } = req.body;
+//   const userId = req.user.id;
+
+//   try {
+//     let profile = await StudentProfile.findOne({ user: userId });
+
+//     if (profile) {
+//       profile.grade = grade;
+//       profile.institution = institution;
+//       profile.rollNo = rollNo;
+//       await profile.save();
+//     } else {
+//       profile = new StudentProfile({ user: userId, grade, institution, rollNo });
+//       await profile.save();
+//     }
+
+//     const user = await User.findById(userId).select("-password");
+
+//     res.status(200).json({
+//       message: 'Profile updated successfully',
+//       user,
+//       profile,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Something went wrong' });
+//   }
+// };
+
 export const updateStudentProfile = async (req, res) => {
-  const { grade, institution, rollNo } = req.body;
+  const { grade, institution, rollNo, name } = req.body;
   const userId = req.user.id;
 
   try {
+    // Update StudentProfile
     let profile = await StudentProfile.findOne({ user: userId });
-
     if (profile) {
       profile.grade = grade;
       profile.institution = institution;
@@ -34,11 +64,18 @@ export const updateStudentProfile = async (req, res) => {
       await profile.save();
     }
 
-    const user = await User.findById(userId).select("-password");
+    // Update User name
+    const user = await User.findById(userId);
+    if (name) {
+      user.name = name;
+      await user.save();
+    }
+
+    const updatedUser = await User.findById(userId).select("-password");
 
     res.status(200).json({
       message: 'Profile updated successfully',
-      user,
+      user: updatedUser,
       profile,
     });
   } catch (err) {
@@ -46,4 +83,3 @@ export const updateStudentProfile = async (req, res) => {
     res.status(500).json({ message: 'Something went wrong' });
   }
 };
-
